@@ -37,14 +37,8 @@ const client = twilio(accountSid, authToken);
   })).data;
 
   const totalMatches = data['total_matches_found'];
-  console.log(`Matches Found ${totalMatches}`);
 
   if (totalMatches < 1) {
-    await client.messages.create({
-      body: 'A car has not been found',
-      from: '+16788258973',
-      to: '+19179915809',
-    })
     return;
   }
 
