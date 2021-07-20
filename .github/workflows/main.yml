@@ -1,11 +1,25 @@
 name: A workflow for my Hello World file
-on: push
+on:
+  schedule:
+  - cron: "*/10 * * * *"
 jobs:
+  runs-on: ubuntu-latest
   build:
     name: Hello world action
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: ./action-a
+      - uses: actions/checkout@v2
         with:
-          MY_NAME: "Mona"
+          fetch-depth: 0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+      - name: Build
+        run: yarn build
+      - name: Run stock check
+        run: yarn start
+        env:
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+
+

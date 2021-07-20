@@ -1,0 +1,18 @@
+{
+  "name": "hello-github-actions",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "repository": "https://github.com/mlavina/hello-github-actions.git",
+  "author": "Michael A. Lavina <michael.lavina@factset.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^16.3.3",
+    "axios": "^0.21.1",
+    "twilio": "^3.66.0",
+    "typescript": "^4.3.5"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "start": "node dist/index.js"
+  }
+}
