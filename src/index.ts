@@ -11,6 +11,7 @@ const client = twilio(accountSid, authToken);
       model: 'm3',
       condition: 'new',
       options: {
+        PAINT: 'BLACK',
         TRIM: 'LRAWD',
       },
       arrangeBy: 'Year',
