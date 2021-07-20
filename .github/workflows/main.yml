@@ -1,7 +1,7 @@
 name: A workflow for my Hello World file
 on:
   schedule:
-  - cron: "*/10 * * * *"
+  - cron: "*/30 * * * *"
   push:
     branches:
       - main
