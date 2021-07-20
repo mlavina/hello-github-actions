@@ -10,7 +10,9 @@ const client = twilio(accountSid, authToken);
     query: {
       model: 'm3',
       condition: 'new',
-      options: {},
+      options: {
+        TRIM: 'LRAWD',
+      },
       arrangeBy: 'Year',
       order: 'desc',
       market: 'US',
