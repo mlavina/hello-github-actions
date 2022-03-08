@@ -5,48 +5,31 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = twilio(accountSid, authToken);
 
+interface Day {
+  date: string
+  availability: 'none' | 'full' | 'dlr_dp' | 'dlr_ca'
+  parks: ['DLR_CA'] | ['DLR_DP'] | [] | ['DLR_CA', 'DLR_DP']
+}
+const foundDates: string[] = [];
+
 (async () => {
-  const query = {
-    query: {
-      model: 'm3',
-      condition: 'new',
-      options: {
-        PAINT: 'BLACK',
-        TRIM: 'LRAWD',
-      },
-      arrangeBy: 'Year',
-      order: 'desc',
-      market: 'US',
-      language: 'en',
-      super_region: 'north america',
-      lng: -75.1749671,
-      lat: 39.9531865,
-      zip: '19130',
-      range: 200,
-      region: 'PA',
-    },
-    offset: 0,
-    count: 50,
-    outsideOffset: 0,
-    outsideSearch: false,
-  };
+ 
+  const data = (await axios.get<Day[]>('https://disneyland.disney.go.com/availability-calendar/api/calendar?segment=ticket&startDate=2022-03-21&endDate=2022-03-24')).data;
+  const looking = data.filter((day) => {
+    return !foundDates.includes(day.date)
+  })
+  
+  const foundDay = looking.find((day) => {
+    return day.availability !== 'none'
+  })
 
-  const params = {
-    query: JSON.stringify(query),
-  };
-
-  const data = (await axios.get('https://www.tesla.com/inventory/api/v1/inventory-results', {
-    params,
-  })).data;
-
-  const totalMatches = data['total_matches_found'];
-
-  if (totalMatches < 1) {
-    return;
+  if (foundDay == null) {
+    return
   }
 
+  const body = `A day has been found ${foundDay.date} for parks ${foundDay.parks}`
   await client.messages.create({
-    body: 'A car has been found',
+    body,
     from: '+16788258973',
     to: '+19179915809',
   })
