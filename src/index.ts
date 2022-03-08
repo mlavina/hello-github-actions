@@ -27,6 +27,8 @@ const foundDates: string[] = [];
     return
   }
 
+  console.log(foundDay)
+
   const body = `A day has been found ${foundDay.date} for parks ${foundDay.parks}`
   await client.messages.create({
     body,
