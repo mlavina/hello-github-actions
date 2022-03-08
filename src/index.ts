@@ -14,7 +14,7 @@ const foundDates: string[] = [];
 
 (async () => {
  
-  const data = (await axios.get<Day[]>('https://disneyland.disney.go.com/availability-calendar/api/calendar?segment=ticket&startDate=2022-03-21&endDate=2022-03-24')).data;
+  const data = (await axios.get<Day[]>('https://disneyland.disney.go.com/availability-calendar/api/calendar?segment=ticket&startDate=2022-03-21&endDate=2022-04-24')).data;
   const looking = data.filter((day) => {
     return !foundDates.includes(day.date)
   })
