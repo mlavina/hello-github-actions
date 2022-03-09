@@ -10,7 +10,7 @@ interface Day {
   availability: 'none' | 'full' | 'dlr_dp' | 'dlr_ca'
   parks: ['DLR_CA'] | ['DLR_DP'] | [] | ['DLR_CA', 'DLR_DP']
 }
-const foundDates: string[] = [];
+const foundDates: string[] = ['2022-03-22'];
 
 (async () => {
  
