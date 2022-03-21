@@ -20,7 +20,7 @@ const foundDates: string[] = [];
   })
   
   const foundDay = looking.find((day) => {
-    return day.availability === 'none'
+    return day.availability !== 'none'
   })
 
   if (foundDay == null) {
@@ -30,9 +30,9 @@ const foundDates: string[] = [];
   console.log(foundDay)
 
   const body = `A day has been found ${foundDay.date} for parks ${foundDay.parks}`
-//   await client.messages.create({
-//     body,
-//     from: '+14133074008',
-//     to: '+19179915809',
-//   })
+   await client.messages.create({
+     body,
+     from: '+14133074008',
+     to: '+19179915809',
+   })
 })();
